@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.App {
+  min-height: 100vh;
+  background: url('/public/lemons wallpaper.jpeg') no-repeat center center/cover;
+  color: white;
+  overflow-x: hidden;
+  position: relative;
+
+  
+  filter: brightness(1.2) contrast(1.05) saturate(1.1);
+}
+
+
+
+/* Blobs */
+.blob {
+  display: none;
+}
+
+
+.blob:nth-child(1) { top: 10%; left: 5%; }
+.blob:nth-child(2) { top: 60%; left: 60%; background: radial-gradient(circle, #fff3b0, #fcb900); animation-delay: 5s; }
+.blob:nth-child(3) { top: 30%; left: 80%; background: radial-gradient(circle, #ffc48c, #ff9a3c); animation-delay: 10s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-50px) translateX(30px); }
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: none;
+  z-index: 100;
+}
+
+.navbar h1 { font-size: 26px; color: #f1c40f; }
+.navbar ul { list-style: none; display: flex; gap: 30px; }
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.navbar ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+.navbar ul li a:hover { color: #ffbb33; }
+.navbar ul li a:hover::after { width: 100%; }
+
+/* Hero Content */
+.hero-content {
+  margin-top: 150px;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+.hero-content h2 {
+  font-size: 42px;
+  font-weight: 700;
+  background: linear-gradient(to right, #fff3b0, #fcb900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+.hero-content p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto 25px;
+  color: #eee;
+}
+.hero-content a {
+  text-decoration: none;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  background: linear-gradient(to right, #ff6600, #ffaa33);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+.hero-content a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
+/* Products Section */
+.produits {
+  margin-top: 80px;
+  margin-bottom: 100px; /* مسافة بين الكارد والـformulaire */
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  color: white;
+  text-align: center;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.produits h2 {
+  font-size: 32px;
+  margin-bottom: 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Cards container */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* 🔥 Cards */
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 20px;
+  width: 240px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.card:hover { transform: translateY(-10px); }
+
+.card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  transition: transform 0.4s ease;
+}
+.card img:hover { transform: scale(1.05); }
+
+.card h3 {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.card p {
+  font-size: 14px;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* زر شفاف أبيض (كارد صغير) */
+.card button {
+  padding: 8px 18px;
+  border-radius: 25px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.card button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* زر Voir plus (داخل الكارد الكبير بنفس ستايل CLIQUEZ ICI) */
+.section-button-global {
+  display: inline-block;
+  margin-top: 20px; 
+  padding: 14px 32px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(to right, #ff6600, #ffaa33);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start; /* على اليسار داخل الكارد الكبير */
+  text-decoration: none;
+}
+.section-button-global:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
+/* Contact Section */
+.contact {
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.contact h2 { font-size: 32px; margin-bottom: 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+.contact form { display: flex; flex-direction: column; gap: 20px; }
+.contact input, .contact textarea {
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+  resize: none;
+}
+.contact button {
+  padding: 15px;
+  border-radius: 30px;
+  border: none;
+  background: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.contact button:hover { background-color: #ffbb33; color: white; }
+
+/* Footer */
+footer { background: rgba(255, 255, 255, 0.1); padding: 20px; text-align: center; color: white; font-size: 14px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar { padding: 20px 30px; flex-wrap: wrap; justify-content: center; }
+  .navbar ul { gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 10px; width: 100%; }
+  .hero-content h2 { font-size: 28px; }
+  .produits h2, .contact h2 { font-size: 24px; }
+  .cards { gap: 15px; }
+  .card { width: 90%; max-width: 250px; height: auto; }
+  .card img { height: 200px; }
+}
+

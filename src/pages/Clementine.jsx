@@ -1,0 +1,320 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext.jsx";
+
+const products = [
+  {
+    title: "Clémentine Bekria",
+    img: "/clementine/bekria.png",
+    price: 7.6,
+    oldPrice: 8.6,
+    rating: 4.6,
+    sku: "CL-BEK-2025",
+    tags: ["Clémentine", "Agrume", "Bekria"],
+    description:
+      "La variété Bekria, qui appartient à la famille clémentine, est cultivée au Maroc pour ses fruits sucrés et faciles à poulager. Flottant dans le climat méditerranéen chaud et méditerranéen du pays, les clémentines de Bekria sont connues pour leur couleur vibrante et leur texture juteuse. Très favorisées dans les ménages marocains et exportées dans le monde entier, elles contribuent à la fameuse industrie des agrumes du pays.",
+    characteristics: [
+      "Forme : Sphérique à légèrement ovale.",
+      "Taille : taille moyenne, plus petite que les oranges traditionnelles mais plus grande que les mandarines.",
+      "Couleur de la peau : orange jaune à orange vif à maturité, avec une texture lisse et brillante.",
+      "Texture de la chair : Juicy, tender, et facile à séparer en segments.",
+      "Présence de graines : Généralement peu ou pas de graines.",
+      "Entreprise: Modérée, offrant une légère résistance enfoncement.",
+      "Arôme : Sweet avec une légère acidité, apportant un délicieux équilibre de douceur et de fraîcheur.",
+      "Teneur en jus: Généralement élevée, typiquement de l'ordre de 40 à 50 % en poids.",
+      "Acidité: modérée, avec des taux d'acidité habituellement compris entre 5 et 8 %.",
+      "Rapport sucré/acidité : Bien équilibré, avec un rapport sucre/acide typiquement de l'ordre de 10 à 15 %.",
+    ],
+    informations: ["Origine : Maroc", "Saison : Novembre - Janvier", "Poids : 90-120g"],
+    exportations: [
+      { country: "Canada", value: 87 },
+      { country: "Russie", value: 95 },
+      { country: "Afrique", value: 80 },
+      { country: "États-Unis", value: 80 },
+    ],
+  },
+  {
+    title: "Clémentine Nour",
+    img: "/clementine/nour.png",
+    price: 9,
+    oldPrice: 10,
+    rating: 4.8,
+    sku: "CL-Nour-2025",
+    tags: ["Clémentine", "Agrume"],
+    description:
+      "Le Nour Clementine du Maroc incarne l'excellence des agrumes locaux, offrant une saveur inégalée et une qualité exceptionnelle. Cultivés dans les régions côtières avec un climat méditerranéen idéal, leur peau mince et lisse s'enorgueillit d'une teinte orange vibrante, un signe de maturité. Leur chair juteuse et sucrée offre un équilibre parfait de douceur et d'acidité, offrant une expérience de goût incomparable. Pratiquaires avec peu ou pas de graines, elles sont appréciées pour la consommation sans effort, disponible de l'automne au début du printemps sur les marchés locaux et internationaux.",
+    characteristics: [
+      "Forme : Globulaire avec proéminent.",
+      "Taille : Petite à moyenne.",
+      "Couleur de la peau : orange avec des teintes verdâtres au début de la saison et orange vers la fin de la saison.",
+      "Texture de chair : Juicy, tender.",
+      "Présence de graines : Seedless.",
+      "Fermeture : Modérément ferme à molle.",
+      "Arôme : délicate, faible acidité et aromatique.",
+      "Teneur en jus: supérieure à 48 %.",
+      "Acidité: Minimum 0,7%.",
+      "Rapport de sucre/acidité : Minimum 8,5.],",
+    ],
+    informations: ["Origine : Maroc", "Saison : Décembre - Février", "Poids : 100-130g"],
+    exportations: [
+      { country: "Canada", value: 87 },
+      { country: "Russie", value: 95 },
+      { country: "Afrique", value: 80 },
+      { country: "États-Unis", value: 80 },
+    ],
+  },
+  {
+    title: "Clémentine Guerdane",
+    img: "/clementine/guerdane.png",
+    price: 7,
+    oldPrice: 8,
+    rating: 4.9,
+    sku: "CL-GUER-2025",
+    tags: ["Clémentine", "Agrume"],
+    description:
+      "La Guerdane Clementine du Maroc est une variété d'agrumes réputée pour sa qualité exceptionnelle et son goût délicieux. Cultivé dans les régions marocaines bénéficiant d'un climat méditerranéen optimal, il se distingue par sa peau fine et sa chair juteuse. Sa saveur sucrée et équilibrée, ainsi que son absence ou quelques graines, en font un choix préféré parmi les consommateurs. Disponible de l'automne au début du printemps, il apporte une touche de fraîcheur méditerranéenne aux marchés locaux et internationaux.",
+    characteristics: [
+      "Forme : Sphérique à légèrement ovale.",
+      "Taille : Moyenne à grande, offrant des fruits généreux.",
+      "Couleur de la peau : orange jaune à orange vif à maturité, avec une texture lisse et brillante.",
+      "Texture de la chair : Juicy, tender, et facile à séparer en segments.",
+      "Présence de graines : Généralement peu ou pas de graines.",
+      "Fermeture : Modérée à ferme, offrant une sensation agréable lorsqu'elle est légèrement pressée.",
+      "Arôme : Sweet et sucré avec une légère acidité, apportant un équilibre délicieux de douceur et de fraîcheur.",
+      "Teneur en jus: Généralement élevée, typiquement de l'ordre de 40 à 50 % en poids.",
+      "Acidité: modérée, avec des taux d'acidité habituellement compris entre 5 et 8 %.",
+      "Rapport sucré/acidité : Bien équilibré, avec un rapport sucre/acide typiquement de l'ordre de 10 à 15 %.",
+    ],
+    informations: ["Origine : Maroc", "Saison : Décembre - Février", "Poids : 100-130g"],
+    exportations: [
+      { country: "Canada", value: 87 },
+      { country: "Russie", value: 95 },
+      { country: "Afrique", value: 80 },
+      { country: "États-Unis", value: 80 },
+    ],
+  },
+];
+
+// Prix selon le pack
+const PACK_PRICE_DELTA = {
+  "Caisse 10kg": 0,
+  "Caisse 15kg": 6,
+  "Filet 5kg": -4,
+};
+
+// Progress bars
+const ExportationBars = ({ data }) => {
+  return (
+    <div className="export-bars">
+      {data.map((item, i) => (
+        <div key={i} className="export-item">
+          <span className="country">{item.country}</span>
+          <div className="bar-container">
+            <div className="bar-fill" style={{ width: `${item.value}%` }}></div>
+          </div>
+          <span className="percent">{item.value} %</span>
+        </div>
+      ))}
+
+      <style>{`
+        .export-item {
+          display:flex;
+          align-items:center;
+          gap:12px;
+          margin:10px 0;
+        }
+        .country { width:100px; font-weight:700; }
+        .bar-container { flex:1; height:8px; background:#ddd; border-radius:6px; overflow:hidden; }
+        .bar-fill { height:100%; background: linear-gradient(90deg, #4caf50, #ff9800); border-radius:6px; }
+        .percent { font-weight:700; }
+      `}</style>
+    </div>
+  );
+};
+
+const ClementinePage = () => {
+  const navigate = useNavigate();
+  const { addItem } = useCart();
+  const [selectedCalibre, setSelectedCalibre] = useState("Small");
+  const [selectedPack, setSelectedPack] = useState("Caisse 10kg");
+  const [selectedBrand, setSelectedBrand] = useState("IRIS MAROC");
+  const [activeTab, setActiveTab] = useState("caracteristiques");
+
+  // Calcul dynamique للثمن حسب الباك المختار
+  const computePrice = (base) => (base + (PACK_PRICE_DELTA[selectedPack] || 0));
+
+  const handleAddToCart = (p) => {
+    const sizeKg = selectedPack.includes("15") ? 15 : selectedPack.includes("5") ? 5 : 10;
+    const unitPrice = computePrice(p.price);
+    addItem({
+      id: `${p.sku}-${selectedBrand}`, // Unique ID with brand
+      name: p.title,
+      image: p.img,
+      sizeKg,
+      unitPrice,
+      quantity: 1,
+      brand: selectedBrand, // Add brand to cart item
+    });
+  };
+
+  // Brands with images
+  const brands = [
+    { src: "/brand1.png", name: "IRIS MAROC" },
+    { src: "/brand2.png", name: "ATLANTIC" },
+    { src: "/brand3.png", name: "CLEMENTINE" },
+    { src: "/brand4.png", name: "ZAGORA" },
+    { src: "/brand5.png", name: "GUERDANE" },
+    { src: "/brand6.png", name: "ALIAS" },
+    { src: "/brand7.png", name: "ANGIE" },
+  ];
+
+  return (
+    <div className="product-page">
+      <style>{`
+        
+        .main-image {
+          width:500px;
+          height:500px;
+          transform: translateY(-250px); /* طلعيهم شوية */
+          transition: transform 0.3s ease;
+        }
+
+        .product-page { max-width:1200px; margin:0 auto; padding:0 16px; font-family:Poppins, sans-serif; color:white; }
+        .product-row { display:flex; flex-wrap:wrap; margin-bottom:60px; align-items:center; }
+        .product-row:nth-child(even) { flex-direction: row-reverse; }
+        .glass-card { border-radius:20px; padding:32px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+          border:1px solid rgba(255,255,255,0.2); box-shadow:0 8px 24px rgba(0,0,0,0.25); background-color: rgba(0,0,0,0.4);
+          display:flex; flex:1; gap:32px; }
+        .main-image { width:400px; height:350px; border-radius:16px; object-fit:cover; }
+        .info { flex:1; display:flex; flex-direction:column; gap:16px; }
+        .title { font-size:2rem; font-weight:700; text-shadow:1px 1px 4px rgba(0,0,0,0.6); }
+        .rating { display:flex; align-items:center; gap:8px; color:#ffcc00; text-shadow:1px 1px 4px rgba(0,0,0,0.6); }
+        .price-row { display:flex; align-items:end; gap:12px; }
+        .price { font-size:1.8rem; font-weight:800; color:#90ee90; text-shadow:1px 1px 4px rgba(0,0,0,0.6); }
+        .old { text-decoration:line-through; color:#bbb; font-weight:600; }
+        .options { display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; }
+        .chip { padding:12px; background:rgba(255,255,255,0.1); border-radius:12px; cursor:pointer;
+          border:1px solid rgba(255,255,255,0.3); transition:0.3s; display:flex; align-items:center; justify-content:center;
+          box-shadow:0 4px 8px rgba(0,0,0,0.2); }
+        .chip img { width:100px; height:60px; object-fit:cover; transition:0.3s; }
+        .chip:hover { transform:scale(1.1); background:rgba(255,255,255,0.2); }
+        .chip.active { background: rgba(255,255,255,0.25); border-color:#ffc107; box-shadow:0 0 12px rgba(255,193,7,0.5); }
+        .chip.active img { transform:scale(1.15); }
+        .cta-row { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
+        .btn { padding:12px 22px; border-radius:12px; border:none; cursor:pointer; font-weight:700; transition:0.3s; }
+        .btn-primary { background:#2e7d32; color:white; }
+        .btn-primary:hover { background:#27642a; }
+        .btn-outline { background:transparent; color:white; border:2px solid white; }
+        .btn-outline:hover { background:white; color:#2e7d32; }
+        .meta { font-size:0.95rem; color:white; display:flex; gap:16px; flex-wrap:wrap; }
+        .tabs { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+        .tabs button { padding:8px 14px; border:none; border-radius:8px; cursor:pointer; font-weight:600; transition:0.3s; }
+        .tabs button.active { background:#ff9800; color:white; }
+        /* تطبيق فقط على الماركات عبر استعمال attribute */
+        .options[data-type="brands"] .chip {
+          width: 110px;
+          height: 110px;
+          padding: 0;
+          overflow: hidden;
+          border-radius: 12px;
+        }
+
+        .options[data-type="brands"] .chip img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 12px;
+          transition: 0.3s ease;
+        }
+
+        .tab-content { padding:16px; margin-top:10px; border-radius:12px; background:rgba(255,255,255,0.05); }
+        @media(max-width:980px) { .product-row { flex-direction:column; align-items:center; } .main-image { width:100%; height:auto; } }
+      `}</style>
+
+      {products.map((p, i) => (
+        <div key={i} className="product-row glass-card" style={{ marginTop: i === 0 ? "120px" : "0px" }}>
+          <img src={p.img} alt={p.title} className="main-image" />
+          <div className="info">
+            <div className="title">{p.title}</div>
+            <div className="rating"><span>★</span> {p.rating}</div>
+            <div className="price-row">
+              <div className="price">{computePrice(p.price).toFixed(2)} €</div>
+              <div className="old">{computePrice(p.oldPrice).toFixed(2)} €</div>
+            </div>
+            <p>{p.description}</p>
+
+            {/* Calibres */}
+            <div className="options">
+              {["Small", "Medium", "Large"].map((c) => (
+                <div key={c} className={`chip ${selectedCalibre === c ? "active" : ""}`} onClick={() => setSelectedCalibre(c)}>
+                  {c}
+                </div>
+              ))}
+            </div>
+
+            {/* Packs */}
+            <div className="options" style={{ marginTop: "8px" }}>
+              {["Caisse 10kg", "Caisse 15kg", "Filet 5kg"].map((pack) => (
+                <div key={pack} className={`chip ${selectedPack === pack ? "active" : ""}`} onClick={() => setSelectedPack(pack)}>
+                  {pack}
+                </div>
+              ))}
+            </div>
+
+            {/* Brands */}
+            <div className="options" style={{ marginTop: "8px" }}>
+              {brands.map((brand, index) => (
+                <div
+                  key={index}
+                  className={`chip ${selectedBrand === brand.name ? "active" : ""}`}
+                  onClick={() => setSelectedBrand(brand.name)}
+                >
+                  <img src={brand.src} alt={brand.name} />
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="cta-row">
+              <button className="btn btn-primary" onClick={() => handleAddToCart(p)}>
+                AJOUTER AU PANIER
+              </button>
+              <button
+                className="btn btn-outline"
+                onClick={() => navigate("/payment", { state: { product: p, brand: selectedBrand, pack: selectedPack, calibre: selectedCalibre } })}
+              >
+                ACHETER MAINTENANT
+              </button>
+            </div>
+
+            <div className="meta">
+              <div>SKU: {p.sku}</div>
+              <div>Tags: {p.tags.join(", ")}</div>
+            </div>
+
+            {/* Tabs */}
+            <div className="tabs">
+              <button className={activeTab === "caracteristiques" ? "active" : ""} onClick={() => setActiveTab("caracteristiques")}>
+                Caractéristiques
+              </button>
+              <button className={activeTab === "informations" ? "active" : ""} onClick={() => setActiveTab("informations")}>
+                Informations
+              </button>
+              <button className={activeTab === "avis" ? "active" : ""} onClick={() => setActiveTab("avis")}>
+                Export
+              </button>
+            </div>
+
+            <div className="tab-content">
+              {activeTab === "caracteristiques" && <ul>{p.characteristics.map((c, j) => <li key={j}>{c}</li>)}</ul>}
+              {activeTab === "informations" && <ul>{p.informations.map((c, j) => <li key={j}>{c}</li>)}</ul>}
+              {activeTab === "avis" && <ExportationBars data={p.exportations} />}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default ClementinePage;

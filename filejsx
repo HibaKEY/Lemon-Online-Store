@@ -1,0 +1,495 @@
+import React, { useState } from "react";
+
+const APropos = () => {
+  const [activeContinent, setActiveContinent] = useState(null);
+
+  const continents = [
+    {
+      id: "africa",
+      name: "Afrique",
+      details:
+        "L'Afrique est connue pour sa diversité agricole et son potentiel d'exportation.",
+      more: "Nous collaborons avec plusieurs pays africains pour développer des pratiques durables.",
+      pinPosition: { top: "72%", left: "42%" },
+    },
+    {
+      id: "europe",
+      name: "Europe",
+      details:
+        "L'Europe bénéficie d'une agriculture moderne et d'un réseau d'import important.",
+      more: "Nos exportations vers l'Europe incluent des produits bio et certifiés.",
+      pinPosition: { top: "12%", left: "47%" },
+    },
+    {
+      id: "america",
+      name: "Amérique",
+      details:
+        "L'Amérique est un marché clé avec une forte demande en produits frais.",
+      more: "Les USA et l'Amérique Latine sont parmi nos principaux partenaires.",
+      pinPosition: { top: "46%", left: "6.5%" },
+    },
+    {
+      id: "asia",
+      name: "Russie",
+      details:
+        "L'Asie représente un marché en pleine croissance avec des besoins variés.",
+      more: "Nos relations concernent surtout les agrumes, huiles et fruits secs.",
+      pinPosition: { top: "13%", left: "70.5%" },
+    },
+    {
+      id: "middle-east",
+      name: "Moyen-Orient",
+      details:
+        "Le Moyen-Orient est une destination majeure pour nos exportations d'agrumes.",
+      more: "Les oranges, citrons et mandarines marocaines y sont très prisées.",
+      pinPosition: { top: "72%", left: "66%" },
+    },
+    {
+      id: "america",
+      name: "canada",
+      details:
+        "L'Amérique est un marché clé avec une forte demande en produits frais.",
+      more: "Les USA et l'Amérique Latine sont parmi nos principaux partenaires.",
+      pinPosition: { top: "12%", left:"19.5%" },
+    },
+  ];
+
+  const toggleContinent = (continent) => {
+    setActiveContinent(activeContinent?.id === continent.id ? null : continent);
+  };
+
+  const closeModal = () => {
+    setActiveContinent(null);
+  };
+
+  return (
+    <div className="apropos-page">
+      <section className="map-section">
+        {/* Map Container - Centered */}
+        <div className="map-wrapper">
+          <div className="map-container">
+            <img
+              src="/world-map-fullscreen.jpg"
+              alt="World Map"
+              className="world-map"
+            />
+
+            {continents.map((continent) => (
+              <div
+                key={continent.id}
+                className={`map-pin-wrapper ${
+                  activeContinent?.id === continent.id ? "active" : ""
+                }`}
+                style={{
+                  top: continent.pinPosition.top,
+                  left: continent.pinPosition.left,
+                }}
+                onClick={() => toggleContinent(continent)}
+              >
+                <div className="pin-dot"></div>
+                <div className="pin-hitbox"></div>
+                <div className="pin-tooltip">
+                  <span>{continent.name}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Modal Centered - Fenêtre au centre de l'écran */}
+        {activeContinent && (
+          <div className="continent-modal-overlay" onClick={closeModal}>
+            <div 
+              className="continent-modal-content fade-in" 
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <h3>{activeContinent.name}</h3>
+                <button className="modal-close-btn" onClick={closeModal}>
+                  ×
+                </button>
+              </div>
+              <div className="modal-body">
+                <p className="details-text">{activeContinent.details}</p>
+                <p className="more-text">{activeContinent.more}</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* CSS */}
+      <style jsx>{`
+        .apropos-page {
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          min-height: 100vh;
+        }
+
+        .map-section {
+          text-align: center;
+          padding: 60px 20px;
+          position: relative;
+        }
+
+        /* Map Wrapper - Centered */
+        .map-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0 auto;
+          max-width: 1000px;
+          width: 100%;
+        }
+
+        .map-container {
+          position: relative;
+          width: 100%;
+          height: 600px; /* Fixed height pour l-map */
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+          background: #fff;
+          margin: 0;
+        }
+
+        .world-map {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 20px;
+          display: block;
+          transition: transform 0.3s ease;
+        }
+
+        .world-map:hover {
+          transform: scale(1.02);
+        }
+
+        .map-pin-wrapper {
+          position: absolute;
+          cursor: pointer;
+          transform: translate(-50%, -50%);
+          z-index: 10;
+          transition: all 0.3s ease;
+          width: 44px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .map-pin-wrapper:hover,
+        .map-pin-wrapper.active {
+          transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .pin-dot {
+          width: 18px;
+          height: 18px;
+          background: #f97316;
+          border-radius: 50%;
+          border: 3px solid white;
+          position: relative;
+          z-index: 3;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+        }
+
+        .map-pin-wrapper:hover .pin-dot,
+        .map-pin-wrapper.active .pin-dot {
+          background: #ea580c;
+          transform: scale(1.2);
+          box-shadow: 0 0 20px rgba(249, 115, 22, 0.7);
+          border-color: #fff;
+        }
+
+        .pin-hitbox {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          z-index: 1;
+          background: transparent;
+        }
+
+        .pin-tooltip {
+          position: absolute;
+          top: -40px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(31, 41, 55, 0.95);
+          color: white;
+          padding: 6px 10px;
+          border-radius: 8px;
+          font-size: 12px;
+          font-weight: 600;
+          white-space: nowrap;
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          backdrop-filter: blur(10px);
+          z-index: 4;
+          margin-top: 4px;
+        }
+
+        .pin-tooltip::before {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-top: 6px solid rgba(31, 41, 55, 0.95);
+        }
+
+        .map-pin-wrapper:hover .pin-tooltip,
+        .map-pin-wrapper.active .pin-tooltip {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+
+        /* Modal Overlay - Centered */
+        .continent-modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          padding: 20px;
+          backdrop-filter: blur(8px);
+          animation: fadeInOverlay 0.3s ease;
+        }
+
+        @keyframes fadeInOverlay {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .continent-modal-content {
+          background: #fff;
+          border-radius: 16px;
+          max-width: 500px;
+          width: 90%;
+          max-height: 70vh;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transform-origin: center;
+          position: relative;
+        }
+
+        @keyframes modalSlideIn {
+          from { 
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+          }
+          to { 
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        .modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 24px;
+          background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+          color: white;
+          position: relative;
+        }
+
+        .modal-header h3 {
+          margin: 0;
+          font-size: 22px;
+          font-weight: 600;
+          letter-spacing: -0.5px;
+        }
+
+        .modal-close-btn {
+          background: rgba(255, 255, 255, 0.2);
+          border: none;
+          color: white;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+          flex-shrink: 0;
+        }
+
+        .modal-close-btn:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: rotate(90deg) scale(1.1);
+        }
+
+        .modal-body {
+          padding: 24px;
+          max-height: calc(70vh - 80px);
+          overflow-y: auto;
+        }
+
+        .details-text {
+          margin-bottom: 16px;
+          line-height: 1.7;
+          color: #333;
+          font-size: 16px;
+          font-weight: 500;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 12px;
+        }
+
+        .more-text {
+          margin: 0;
+          line-height: 1.7;
+          color: #666;
+          font-size: 15px;
+          font-style: italic;
+          padding-left: 8px;
+          border-left: 3px solid #f97316;
+        }
+
+        /* Custom scrollbar pour modal */
+        .modal-body::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 3px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 3px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .map-section {
+            padding: 40px 15px;
+          }
+
+          .map-wrapper {
+            max-width: 100%;
+          }
+
+          .map-container {
+            height: 450px;
+            border-radius: 16px;
+          }
+
+          .world-map {
+            border-radius: 16px;
+          }
+
+          .continent-modal-overlay {
+            padding: 10px;
+          }
+
+          .continent-modal-content {
+            width: 95%;
+            max-height: 85vh;
+            border-radius: 12px;
+          }
+
+          .modal-header {
+            padding: 16px 20px;
+          }
+
+          .modal-header h3 {
+            font-size: 20px;
+          }
+
+          .modal-body {
+            padding: 20px;
+            max-height: calc(85vh - 80px);
+          }
+
+          .details-text {
+            font-size: 15px;
+          }
+
+          .more-text {
+            font-size: 14px;
+          }
+
+          .pin-tooltip {
+            display: none;
+          }
+
+          .map-pin-wrapper:hover,
+          .map-pin-wrapper.active {
+            transform: translate(-50%, -50%) scale(1.3);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .map-section {
+            padding: 30px 10px;
+          }
+
+          .map-container {
+            height: 350px;
+            border-radius: 12px;
+          }
+
+          .continent-modal-content {
+            width: 98%;
+            max-height: 90vh;
+            border-radius: 10px;
+            margin: 5px;
+          }
+
+          .modal-header {
+            padding: 14px 16px;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+          }
+
+          .modal-header h3 {
+            font-size: 18px;
+          }
+
+          .modal-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+          }
+
+          .modal-body {
+            padding: 16px;
+          }
+
+          .details-text,
+          .more-text {
+            font-size: 14px;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default APropos;
