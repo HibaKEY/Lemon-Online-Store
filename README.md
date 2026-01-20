@@ -1,4 +1,4 @@
-9iyem hada 3la 10 # Lemon E-Commerce Website
+# Lemon E-Commerce Website
 
 ## Description
 Lemon-site is a full-stack **E-commerce web application** dedicated to selling lemons online.  
@@ -6,7 +6,7 @@ The project is built using the **MERN Stack** (MongoDB, Express.js, React.js, No
 
 The goal of this project is to provide a simple, clean, and responsive online shopping experience while applying modern web development practices.
 
----
+_ _ _
 
 ## Features
 - Product listing and display
@@ -16,7 +16,7 @@ The goal of this project is to provide a simple, clean, and responsive online sh
 - Database management with MongoDB
 - Clean and structured project architecture
 
----
+_ _ _
 
 ## Tech Stack
 - **Frontend:** React.js, HTML, CSS, JavaScript  
@@ -24,7 +24,7 @@ The goal of this project is to provide a simple, clean, and responsive online sh
 - **Database:** MongoDB  
 - **Tools:** Git, GitHub, VS Code  
 
----
+_ _ _
 
 ## Getting Started
 
@@ -34,7 +34,7 @@ Make sure you have the following installed:
 - npm
 - MongoDB (if the backend uses it)
 
----
+_ _ _
 
 ### Installation
 
@@ -54,6 +54,8 @@ npm start
 5.Open your browser at:
 http://localhost:3000
 
+_ _ _
+
 ##Build for Production
 
 To create an optimized production build:
@@ -65,6 +67,8 @@ Lemon-site/
 │── public/         # Static assets
 │── package.json    # Project configuration
 │── README.md       # Project documentation
+
+_ _ _
 
 ###Skills Demonstrated
 
@@ -82,6 +86,8 @@ Lemon-site/
 
 -Technical documentation
 
+_ _ _
+
 ###Author
 
 Hiba Chakir
@@ -90,10 +96,9 @@ Aspiring Full-Stack / Data Engineer
 
 +GitHub: https://github.com/HibaKEY
 
+_ _ _
+
 ###License
 
 This project is licensed under the MIT License.
-git clone https://github.com/HibaKEY/Lemon-site.git
-This project is licensed under the MIT License.
-```bash
 git clone https://github.com/HibaKEY/Lemon-site.git
