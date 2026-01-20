@@ -1,4 +1,4 @@
-# Lemon E-Commerce Website
+9iyem hada 3la 10 # Lemon E-Commerce Website
 
 ## Description
 Lemon-site is a full-stack **E-commerce web application** dedicated to selling lemons online.  
@@ -39,64 +39,61 @@ Make sure you have the following installed:
 ### Installation
 
 1. Clone the repository:
-2. Navigate to the project directory:
+git clone https://github.com/HibaKEY/Lemon-site.git
 
+2. Navigate to the project directory:
 cd Lemon-site
 
-
-Install dependencies:
-
+3.Install dependencies:
 npm install
 
-
-Run the development server:
-
+4.Run the development server:
 npm start
 
 
-Open your browser at:
-
+5.Open your browser at:
 http://localhost:3000
 
-Build for Production
+##Build for Production
 
 To create an optimized production build:
-
 npm run build
 
-Project Structure
+###Project Structure
 Lemon-site/
 │── src/            # React source files
 │── public/         # Static assets
 │── package.json    # Project configuration
 │── README.md       # Project documentation
 
-Skills Demonstrated
+###Skills Demonstrated
 
-Full-stack web development (MERN)
+-Full-stack web development (MERN)
 
-Frontend component design
+-Frontend component design
 
-Backend API development
+-Backend API development
 
-Database integration
+-Database integration
 
-Code organization and readability
+-Code organization and readability
 
-Version control with Git
+-Version control with Git
 
-Technical documentation
+-Technical documentation
 
-Author
+###Author
 
 Hiba Chakir
 Data Engineering Student
 Aspiring Full-Stack / Data Engineer
 
-GitHub: https://github.com/HibaKEY
++GitHub: https://github.com/HibaKEY
 
-License
+###License
 
+This project is licensed under the MIT License.
+git clone https://github.com/HibaKEY/Lemon-site.git
 This project is licensed under the MIT License.
 ```bash
 git clone https://github.com/HibaKEY/Lemon-site.git
